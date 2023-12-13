@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+
+
+
+
+
+
+
+
+
+    <style>
+        .pre-scrollable{
+            height:500px;
+            overflow-y:scroll;
+        }
+        h1 {
+            text-align: center;
+        }
+        form{
+            text-align: center;
+        }
+        table{
+            text-align: center;
+        }
+        .blue-container {
+            background-color: blue;
+            padding: 10px; /* Add padding for better appearance */
+        }
+    </style>
+</head>
+<body>
+<div >
+    <h1>Final Exam Set C</h1>
+
+    <h1>List of Students</h1>
+
+    <div class="container mt-2 pre-scrollable">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <form method="get" th:action="@{index}">
+                <button type="submit" class="btn-primary">Category Code</button>
+                <button type="submit" class="btn-primary">Category Description</button>
+                <button type="submit" class="btn-primary">Total Sales</button>
+            </form>
+            <br>
+
+            <form class="blue-container">
+                <div>
+                    <label>Recipe No:</label>
+                    <input type="text" name="keyword">
+                    <label>Item Type</label>
+                </div>
+                <div>
+                    <label>Grade</label>
+                    <select class="form-control" name="Icode" th:field="${items.Icode}">
+                        <option th:each="item : ${distinctItems}" th:value="${item.Icode}" th:text="${item.Icode}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>Quantity:</label>
+                    <input type="text" name="quantity">
+                    <label>Transaction date:</label>
+                    <input class="form-control" type="date" name="dot" th:value="${sales.dot}">
+                    <span th:errors="${sales.dot}"></span>
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+            <br>
+            <br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Receip No</th><th>Item Code</th><th>Quantity</th><th>Transaction Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p:${salesList}">
+                    <td th:text="${p.recno}"></td>
+                    <td th:text="${p.icode}"></td>
+                    <td th:text="${p.qty}"></td>
+                    <td th:text="${p.dot}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
